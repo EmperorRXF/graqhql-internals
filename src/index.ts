@@ -1,27 +1,25 @@
+import 'reflect-metadata';
+
 import * as express from 'express';
 import helmet = require('helmet');
-import { createLogger, format, transports } from 'winston';
 
 import { config } from './common';
+import { getLogger } from './common/logger';
+import { executeBasicQuery } from './modules/basic';
+import { ormStartup } from './modules/orm';
 
-const logger = createLogger({
-  format: format.combine(
-    format.timestamp(),
-    format.splat(),
-    format.json(),
-    format.prettyPrint({ colorize: true, depth: 10 }),
-  ),
-  defaultMeta: { serviceId: config.serviceId },
-  transports: [new transports.Console()],
-});
+const logger = getLogger('bootstrap');
 
 async function bootstrap(): Promise<void> {
+  executeBasicQuery();
+
   const app = express().use(helmet());
+  ormStartup(app);
 
   app.listen(config.port, () => {
     if (config.isDev()) {
-      logger.info('Application Running', {
-        url: `http://localhost:${config.port}`,
+      logger.info('GraphQL Server Running', {
+        url: `http://localhost:${config.port}/graphql`,
       });
     }
   });

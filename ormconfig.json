@@ -1,0 +1,11 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "postgres_pwd",
+  "database": "graphql_demo",
+  "synchronize": true,
+  "logging": false,
+  "entities": ["dist/modules/orm/entity/**/*.js"]
+}
