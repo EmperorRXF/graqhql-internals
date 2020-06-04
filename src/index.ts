@@ -11,18 +11,18 @@ import { ormStartup } from './modules/orm';
 const logger = getLogger('bootstrap');
 
 async function bootstrap(): Promise<void> {
-  executeBasicQuery();
+  // executeBasicQuery();
 
-  // const app = express().use(helmet());
-  // ormStartup(app);
+  const app = express().use(helmet());
+  ormStartup(app);
 
-  // app.listen(config.port, () => {
-  //   if (config.isDev()) {
-  //     logger.info('GraphQL Server Running', {
-  //       url: `http://localhost:${config.port}/graphql`,
-  //     });
-  //   }
-  // });
+  app.listen(config.port, () => {
+    if (config.isDev()) {
+      logger.info('GraphQL Server Running', {
+        url: `http://localhost:${config.port}/graphql`,
+      });
+    }
+  });
 }
 
 bootstrap().catch((error) => {

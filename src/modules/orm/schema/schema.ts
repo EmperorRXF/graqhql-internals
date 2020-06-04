@@ -9,12 +9,12 @@ export const typeDefs = gql`
 
   type Query {
     getUser(id: String!): User!
-    # getAllUsers: [User]!
+    getAllUsers: [User]!
   }
 
   type Mutation {
     addUser(name: String!, email: String): User!
-    # updateUser(id: String!, name: String, email: String): User!
-    # deleteUser(id: String!): User!
+    updateUser(id: String!, name: String, email: String): User!
+    deleteUser(id: String!): User!
   }
 `;
