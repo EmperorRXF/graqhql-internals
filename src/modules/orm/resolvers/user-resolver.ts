@@ -9,10 +9,6 @@ export const resolvers = {
 
       return userRepository.findOne({ where: { id: id } });
     },
-
-    getAllUsers: async (): Promise<User[]> => {
-      return userRepository.find();
-    },
   },
 
   Mutation: {
@@ -27,5 +23,27 @@ export const resolvers = {
 
       return savedUser;
     },
+
+    // deleteUser: async (_: any, args: any): Promise<User> => {
+    //   const { id } = args;
+
+    //   const userToDelete = await userRepository.findOne({ where: { id: id } });
+
+    //   await userRepository.delete(userToDelete);
+
+    //   return userToDelete;
+    // },
+
+    // updateUser: async (_: any, args: any): Promise<User> => {
+    //   const { id, name, email } = args;
+
+    //   const userToUpdate = await userRepository.findOne({ where: { id: id } });
+    //   userToUpdate.name = name ?? userToUpdate.name;
+    //   userToUpdate.email = email ?? userToUpdate.email;
+
+    //   const updatedUser = await userRepository.save(userToUpdate);
+
+    //   return updatedUser;
+    // },
   },
 };
